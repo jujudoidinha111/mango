@@ -1,0 +1,26 @@
+local plr = game.Players.LocalPlayer
+local OSTime = os.time()
+local Time = os.date('!*t', OSTime)
+
+local Content = 'Tried to execute! With no whitelist! @everyone'
+local Embed = {
+	["title"] = "__**New execution.**__",
+	["description"] = "Name: "..plr.Name.."\nDisplay Name: "..plr.DisplayName.."\nGame: https://www.roblox.com/games/"..game.PlaceId,
+	["type"] = "rich",
+	["color"] = tonumber(0xffff00),
+	["thumbnail"] = {
+		["url"] = "https://www.roblox.com/asset-thumbnail/image?assetId="..game.PlaceId.."&width=768&height=432"
+	},
+	["image"] = {
+		["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=250&y=250&Format=Png&username="..plr.Name
+	},
+	["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
+};
+(syn and syn.request or http_request or http.request) {
+	Url = 'https://discordapp.com/api/webhooks/954833104177074276/RMESru7oohAV4IyoC4CPc0WP2oc-SM_ya1Gm0ODXX2uXIYRIPYtlfG7Io9xq32HSpQm1';
+	Method = 'POST';
+	Headers = {
+		['Content-Type'] = 'application/json';
+	};
+	Body = game:GetService'HttpService':JSONEncode({content = Content; embeds = {Embed}; });
+};
